@@ -14,10 +14,10 @@ pipeline{
       steps{
         sh "docker build -t maro4299311/radioshash:${env.BUILD_NUMBER} App_Sourcecode/."                    
         withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                   sh '''
-                   docker login -u $USERNAME -p $PASSWORD
-                   docker push maro4299311/radioshash:${env.BUILD_NUMBER}
-                      '''
+                  
+                  sh "docker login -u $USERNAME -p $PASSWORD"
+                  sh "docker push maro4299311/radioshash:${env.BUILD_NUMBER}"
+                     
         }
       }
     }
