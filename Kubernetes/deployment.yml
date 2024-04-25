@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radioshash-deployment
+  labels:
+    name: radioshash
+    app: radioshash-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radioshash-app
+      name: radioshash
+  template:
+    metadata:
+      labels:
+        app: radioshash-app
+        name: radioshash
+    spec:
+      containers:
+      - name: radioshash-container
+        image: maro4299311/radioshash:1.0
+
+        ports:
+        - containerPort: 5000
