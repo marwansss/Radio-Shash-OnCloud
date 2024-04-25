@@ -3,43 +3,38 @@ pipeline{
   agent any
 
   stages{
-    stage('build'){
+    stage('Fitch last code updates'){
       steps{
         git(url: 'https://github.com/marwansss/Radio-Shash-OnCloud.git', branch: 'test')
-        cd App_SourceCode/
-        docker build -t maro4299311/radioshash:1.0 .
-        docker login -u $USER -p $PASS
-        docker push maro4299311/radioshash:1.0
+        sh "scp maro@192.168.1.6:/home/maro/Desktop/Radio-Shash-OnCloud/Terraform/model_2 (3).h5 ./App_Sourcecode "
       }
     }
 
 
-    stage('test'){
+    stage('build Image'){
       steps{
         sh '''
-        docker run -d -p 5000:5000 --name radioshash maro4299311/radioshash:1.0
-        curl localhost:5000
-        if [ $? -eq 0 ]; then
-           echo "container has successfuly deployed"
-           docker rm radioshash
-        else
-           echo "container has failed to deployed"
-        fi
-        '''
+        cd App_Sourcecode
+        sudo docker build -t maro4299311/radioshash:${env.BUILD_NUMBER} .
+           '''                    
+        withCredentials([usernamePassword(credentialsId: 'dockerusername&password', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                   sh '''
+                   sudo docker login -u $USERNAME -p $PASSWORD
+                   sudo docker push maro4299311/radioshash:${env.BUILD_NUMBER}
+                      '''
+        }
       }
     }
 
-
-  stage('deploy'){
+    stage('update k8s files'){
       steps{
-        cd var/lib/jenkins/workspace/radioshash/Kubernetes
-        kubectl create -f deployment.yml
-        kubectl create -f service.yml
+        cd ../Kubernetes
+        sh "sed -i \"s|image:.*|image: maro4299311/radioshash:${env.BUILD_NUMBER}|g\" deployment.yml"
       }
     }
+
 
 
   }
 }
-
 
