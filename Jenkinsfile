@@ -12,14 +12,12 @@ pipeline{
 
     stage('build Image'){
       steps{
-        sh '''
         cd App_Sourcecode/
-        sudo docker build -t maro4299311/radioshash:${env.BUILD_NUMBER} .
-           '''                    
+        sh "docker build -t maro4299311/radioshash:${env.BUILD_NUMBER} ."                    
         withCredentials([usernamePassword(credentialsId: 'dockerusername&password', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                    sh '''
-                   sudo docker login -u $USERNAME -p $PASSWORD
-                   sudo docker push maro4299311/radioshash:${env.BUILD_NUMBER}
+                   docker login -u $USERNAME -p $PASSWORD
+                   docker push maro4299311/radioshash:${env.BUILD_NUMBER}
                       '''
         }
       }
