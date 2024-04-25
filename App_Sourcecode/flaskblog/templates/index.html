@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+  <title>RadioShash</title>
+  <link rel="icon" href="static/img/5801748.jpg " height="35px" width="40px" class="rounded-circle">
+  <script>
+    var message = "right click is disabled";
+    
+    function rtclickcheck(keyp) {
+      if (navigator.appName == "Netscape" && keyp.which == 3) {
+        alert(message);
+        return false;
+      }
+      if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) {
+        alert(message);
+        return false;
+      }
+    }
+    
+    document.onmousedown = rtclickcheck;
+  </script>
+</head>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+<body>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container">
+      <a href="{{ url_for('home') }}" class="navbar-brand">
+        <img src="static/img/5801748.jpg" alt="" height="35px" width="40px" class="rounded-circle">
+        RadioShash
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="{{ url_for('login') }}" class="nav-link">SignIn</a>
+          </li>
+          <li class="nav-item">
+            <a href="#Doctors" class="nav-link">Doctors</a>
+          </li>
+         
+          <li class="nav-item">
+            <a href="#questions" class="nav-link">Questions</a>
+          </li>
+          <li class="nav-item">
+            <a href="#intro" class="nav-link">AboutUs</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url_for('super') }}" class="nav-link">Supervisors</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+  <main>
+
+    <section id="particles-js" class=" trans  ">
+      <!-- introduction -->
+      <section class=" text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start " id="intro">
+        <div class="container">
+          <div class="d-sm-flex align-items-center justify-content-between">
+            <div>
+              <h1 class="H1">Welcome to RadioShash <br><span class="change">Brain Tumor Diagnosis System </span> </h1>
+              <p class="lead my-4">
+                We offer you a chance to improve your diagnosis efficiency by providing that software to help you to
+                detect Brain Tumors.
+                All you need to do
+
+                Upload Image . Submit . Get Result
+              </p>
+              <br>
+              <br>
+
+              <a href="{{ url_for('Signup') }}" class="pb-5 mb-5 ">
+                <button class="btn btn-primary btn-lg ">Try Radioshash</button>
+              </a>
+            </div>
+            <img class="img-fluid w-50 d-none d-sm-block" src="static/img/neurologist_4M.jpg" alt="lol" />
+          </div>
+        </div>
+      </section>
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+
+    <!-- AI model -->
+    <!-- <h2 class="my">Upload Image</h2>
+<form action="" enctype="multipart/form-data" class="p-3 text-center" id="my-form">
+    <input class="form-control" type="file" name="image">
+    <br><br>
+    <input class="btn btn-primary mt-3" type="submit" value="Submit">
+</form>
+<p id="my-paragraph" style="display: none; color: red;">Please login first!</p> -->
+
+
+
+
+
+
+  
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- Question Accordion -->
+    <section id="questions" class="pt-5 mt-3">
+      <div class="container">
+        <h2 class="text-center  mt-3 pt-5">Frequently Asked Questions</h2>
+        <div class="accordion accordion-flush" id="questions">
+          <!-- Item 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#question-one">
+                Does this application service replace the Neurologists?
+              </button>
+            </h2>
+            <div id="question-one" class="accordion-collapse collapse" data-bs-parent="#questions">
+              <div class="accordion-body">
+                Answer: No, this application is to help to improve the efficincy the Neurologists diagnosis or to confirm it.
+              </div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#question-two">
+                Why should I use this application?
+              </button>
+            </h2>
+            <div id="question-two" class="accordion-collapse collapse" data-bs-parent="#questions">
+              <div class="accordion-body">
+                Answer: It helps to get more than an opinion about what in the MRI image.
+                 This means if the Neurologist give an opinion like No_Tumor and the application says Glioma_Tumor you need to make more checkups.
+              </div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#question-three">
+                Does this application supports CT or Xray images?
+              </button>
+            </h2>
+            <div id="question-three" class="accordion-collapse collapse" data-bs-parent="#questions">
+              <div class="accordion-body">
+                Answer: No, it supports only MRI images.
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </section>
+
+    <br>
+    <br>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- Doctors -->
+    <section id="Doctors" class="p-5 bg-custom">
+      <div class="container">
+        <h2 class="text-center text-white">Recommended Doctors</h2>
+        <p class="lead text-center text-white mb-5">
+        </p>
+
+
+        <div class="row g-6">
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <a href="https://www.vezeeta.com/en/dr/Doctor-Mohamed-Abu-Elmaaty-Neurology"> <img
+                    src="static/img/doctor-mohamed-abu-elmaaty-neurology_20180829102628342.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" /></a>
+                <h3 class="card-title mb-3">DrMohamedAbuElmaaty</h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/Doctor-Mohamed-Abu-Elmaaty-Neurology"><img
+                      src="static/img/vezeeta.jpg" alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!-- <img
+                src="static/img/doctor-amr-el-desokey-pediatrics-and-new-born_20170708234217.jpg"
+                class="rounded-circle mb-3 img-responsive thumb"
+                alt=""
+              /> -->
+                <a href="https://www.vezeeta.com/en/dr/Doctor-Amr-El-desokey-Pediatrics-and-New-Born"> <img
+                    src="static/img/doctor-amr-el-desokey-pediatrics-and-new-born_20170708234217.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" width="50" height="50" /></a>
+                <h3 class="card-title mb-3">dr.Amr El desokey</h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/Doctor-Amr-El-desokey-Pediatrics-and-New-Born"><img
+                      src="static/img/vezeeta.jpg" alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <a href="https://www.vezeeta.com/en/dr/doctor-hesham-elhenawy-neurology"> <img src="static/img/dr.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" /></a>
+                <h3 class="card-title mb-3">dr.Hesham elhenawy</h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/doctor-hesham-elhenawy-neurology"><img
+                      src="static/img/vezeeta.jpg" alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <a href="https://www.vezeeta.com/en/dr/doctor-osama-nashaat-neurology"> <img
+                    src="static/img/doctor-osama-nashaat-neurology_20201020121932832.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" /></a>
+                <h3 class="card-title mb-3">dr.Osama Nashaat</h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/doctor-osama-nashaat-neurology"><img
+                      src="static/img/vezeeta.jpg" alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <a href="https://www.vezeeta.com/en/dr/doctor-sameh-mahmoud-hamoda-neurology"> <img
+                    src="static/img/doctor-sameh-mahmoud-hamoda-neurology_20191208172947175.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" /></a>
+                <h3 class="card-title mb-3">dr.Sameh Mahmoud </h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/doctor-sameh-mahmoud-hamoda-neurology"><img
+                      src="static/img/vezeeta.jpg" alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <a href="https://www.vezeeta.com/en/dr/doctor-mona-nada-neurology"> <img src="static/img/doctora.jpeg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" /></a>
+                <h3 class="card-title mb-3">dr.Mona Nada</h3>
+                <p class="card-text">
+                  <a href="https://www.vezeeta.com/en/dr/doctor-mona-nada-neurology"><img src="static/img/vezeeta.jpg"
+                      alt="" width="50" height="50">Vezeeta</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+    </section>
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+  
+
+   
+
+    <!-- Developers -->
+    <section id="Developers" class="p-5 bg-custom ">
+      <div class="container">
+        <h2 class="text-center text-white">Our Developers</h2>
+        <p class="lead text-center text-white mb-5">
+        </p>
+
+
+        <div class="row g-6 justify-content-center">
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/ahmed gomaa.jpg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Ahmed Gomaa</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/shady.jpg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Shady Ramadan</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/Bodee.jpg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Abdelrhman Alaa</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/Maro.jpg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Marwan Abdelaziz</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/dashdash.jpeg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Mostafa Magdy</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img src="static/img/belly.jpg" class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Abdallah Nabil</h3>
+                <p class="card-text">
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+    </section>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- contact info -->
+    <section class="p-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md">
+            <h2 class="text-center mb-4">Contact Info</h2>
+            <ul class="list-group list-group-flush lead">
+              <li class="list-group-item">
+                <span class="fw-bold">Location:</span> Egypt
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Phone:</span> (333) 333-3333
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Email:</span> Pua.edu.eg@gmail.com
+              </li>
+            </ul>
+          </div>
+          <div class="col-md">
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <!-- footer -->
+  <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="leadd">Copy &copy; RadioShash</p>
+
+      <a href="#" class="position-absolute bottom-0 end-0 p-5">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+    </div>
+  </footer>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+  <script src="static/js/bootstrap.min.js"></script>
+  
+  <script>
+    var navbar = document.querySelector('.navbar');
+    var body = document.querySelector('body');
+    var lastScroll = 0;
+
+    window.addEventListener('scroll', function () {
+      var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      var bodyColor = window.getComputedStyle(body).backgroundColor;
+
+      if (currentScroll > lastScroll) {
+        navbar.style.backgroundColor = bodyColor;
+      } else {
+        navbar.style.backgroundColor = 'transparent';
+      }
+
+      if (currentScroll > 0) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+
+      lastScroll = currentScroll;
+    });
+
+
+
+
+
+
+  </script>
+
+
+  <script>
+    particlesJS.load('particles-js', "{{ url_for('static', filename='js/particles.json') }}");
+  </script>
+
+
+
+</body>
+
+</html>

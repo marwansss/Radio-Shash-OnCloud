@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style1.css">
+    <title>RadioShash</title>
+    <link rel="icon" href="static/img/5801748.jpg " height="35px" width="40px" class="rounded-circle">
+    <script>
+      var message = "right click is disabled";
+      
+      function rtclickcheck(keyp) {
+        if (navigator.appName == "Netscape" && keyp.which == 3) {
+          alert(message);
+          return false;
+        }
+        if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) {
+          alert(message);
+          return false;
+        }
+      }
+      
+      document.onmousedown = rtclickcheck;
+    </script>
+</head>
+<body>
+
+
+
+
+      <!-- navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="navbar-brand"><img src="static/img/5801748.jpg" alt="" height="35px" width="40px" class="rounded-circle">RadioShash</a>
+      <button class="navbar-toggler" type="button"data-bs-toggle="collapse"data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>  
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+  </nav>
+
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+     <!----------------------- Main Container -------------------------->
+     <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <!----------------------- Login Container -------------------------->
+           <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <!--------------------------- Left Box ----------------------------->
+           <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box bg-dark" >
+               <div class="featured-image mb-3">
+                <img src="static/img/1.png" class="img-fluid" style="width: 250px;">
+               </div>
+               <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
+               <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">To be able to use our services  .</small>
+           </div> 
+        <!-------------------- ------ Right Box ---------------------------->
+            
+           <div class="col-md-6 right-box">
+            <div class="row align-items-center">
+                <div class="header-text mb-4">
+                    <h2>SignIn</h2>
+                   
+               </div>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+    
+                    <fieldset class="form-group">
+                        
+                        <div class="input-group mb-3">
+                            
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg bg-light fs-6 is-invalid"  ) }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control form-control-lg bg-light fs-6", placeholder="Email address"  ) }}
+                            {% endif %}
+                        </div>
+                        <div class="input-group mb-3">
+                           
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control-lg bg-light fs-6 is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control form-control-lg bg-light fs-6" , placeholder="Password") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-check">
+                          {{ form.remember(class="form-check-input") }}
+                          {{ form.remember.label(class="form-check-label") }}
+                      </div>
+
+
+
+                        
+                    </fieldset>
+
+                    <small class="text-muted ml-2">
+                      <a href="#">Forgot Password?</a>
+                  </small>
+
+                    <div class="form-group">
+                      {{ form.submit(class="btn btn-lg btn-primary w-100 fs-6 bg-dark") }}
+                  </div>
+
+
+                 
+
+                </form>
+
+
+
+
+
+                    
+                    
+
+
+                    <div class="border-top pt-3">
+                      <small class="text-muted">
+                          Need An Account? <a class="ml-2" href="{{ url_for('Signup') }}">Sign Up</a>
+                      </small>
+                  </div>
+    
+    
+                
+            </div>
+
+          
+
+
+
+              
+           </div> 
+          </div>
+        </div>
+
+</body>
+
+ <!-- footer -->
+ <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="lead">Copy &copy; RadioShash</p>
+
+      <a href="#" class="position-absolute bottom-0 end-0 p-5">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+    </div>
+
+  </footer>
+    

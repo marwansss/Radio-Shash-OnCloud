@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="static/style.css"> -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+  <title>RadioShash</title>
+  <link rel="icon" href="static/img/5801748.jpg " height="35px" width="40px" class="rounded-circle">
+  <!-- <script>
+    var message = "right click is disabled";
+    
+    function rtclickcheck(keyp) {
+      if (navigator.appName == "Netscape" && keyp.which == 3) {
+        alert(message);
+        return false;
+      }
+      if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) {
+        alert(message);
+        return false;
+      }
+    }
+    
+    document.onmousedown = rtclickcheck;
+  </script> -->
+</head>
+
+<body>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container">
+      <a href="{{ url_for('home') }}" class="navbar-brand">
+        <img src="static/img/5801748.jpg" alt="" height="35px" width="40px" class="rounded-circle">
+        RadioShash
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#super" class="nav-link">Supervisors</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('login') }}" class="nav-link">SignIn</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+
+
+
+  <main>
+
+    <section id="particles-js" class=" trans  ">
+      <!-- introduction -->
+      <section class=" text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start " id="intro">
+        <div class="container">
+          <div class="d-sm-flex align-items-center justify-content-between">
+            <div>
+              <h1 class="H1">Welcome to RadioShash <br><span class="change">Brain Tumor Diagnosis System </span> </h1>
+              <p class="lead my-4">
+                We offer you a chance to improve your diagnosis efficiency by providing that software to help you to
+                detect Brain Tumors.
+                All you need to do
+
+                Upload Image . Submit . Get Result
+              </p>
+              <!-- <a href="Signup.html">
+            <button class="btn btn-primary btn-lg">SignUp</button>
+          </a> -->
+
+              <br>
+              <br>
+
+              <a href="{{ url_for('Signup') }}" class="pb-5 mb-5 ">
+                <button class="btn btn-primary btn-lg ">Try Radioshash</button>
+              </a>
+            </div>
+            <img class="img-fluid w-50 d-none d-sm-block" src="static/img/neurologist_4M.jpg" alt="lol" />
+          </div>
+        </div>
+      </section>
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+   
+
+    <!-- Supervisors -->
+    <section id="super" class="p-5 bg-custom">
+      <div class="container">
+        <h2 class="text-center text-white">Supervisors</h2>
+        <p class="lead text-center text-white mb-5">
+        </p>
+
+
+        <div class="row g-6  " style="justify-content: center;">
+          <div class="col-md-6 col-lg-2"  >
+            <div class="card bg-light">
+              <div class="card-body text-center ">
+                 <img
+                    src="static/img/d2539065-c497-4301-9f99-e9acd2d4b6f6.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" />
+                <h3 class="card-title mb-3">Prof. Magdy Abdelazim</h3>
+                <p class="card-text">
+                  
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 col-lg-2">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!-- <img
+                src="static/img/doctor-amr-el-desokey-pediatrics-and-new-born_20170708234217.jpg"
+                class="rounded-circle mb-3 img-responsive thumb"
+                alt=""
+              /> -->
+               <img
+                    src="static/img/dr.lamia.jpg"
+                    class="rounded-circle mb-3 img-responsive thumb" alt="" width="50" height="50" />
+                <h3 class="card-title mb-3">Dr.Lamiaa Ali</h3>
+                <p class="card-text">
+                 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+  
+
+   
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+  </main>
+
+  <!-- footer -->
+  <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="leadd">Copy &copy; RadioShash</p>
+
+      <a href="#" class="position-absolute bottom-0 end-0 p-5">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+
+    </script> -->
+
+  <script src="static/js/bootstrap.min.js"></script>
+  <script>
+    var navbar = document.querySelector('.navbar');
+    var body = document.querySelector('body');
+    var lastScroll = 0;
+
+    window.addEventListener('scroll', function () {
+      var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      var bodyColor = window.getComputedStyle(body).backgroundColor;
+
+      if (currentScroll > lastScroll) {
+        navbar.style.backgroundColor = bodyColor;
+      } else {
+        navbar.style.backgroundColor = 'transparent';
+      }
+
+      if (currentScroll > 0) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+
+      lastScroll = currentScroll;
+    });
+
+
+
+
+
+
+  </script>
+
+
+  <script>
+    particlesJS.load('particles-js', "{{ url_for('static', filename='js/particles.json') }}");
+  </script>
+
+
+
+</body>
+
+</html>
