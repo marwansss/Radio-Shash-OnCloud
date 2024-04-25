@@ -1,0 +1,23 @@
+- name: get token from master to join cluster
+  become: false
+  when: inventory_hostname in groups['master']
+  ansible.builtin.shell:
+    cmd: kubeadm token create --print-join-command
+  register: join_command
+
+
+
+
+- name: Print variable
+  ansible.builtin.debug:
+    msg: "{{ hostvars[groups['master'].0].join_command.stdout  }}"
+
+
+
+- name: join the cluster as worker node
+  when: inventory_hostname in groups['worker']
+  become: true
+  ansible.builtin.shell:
+    cmd: "{{ hostvars[groups['master'].0].join_command.stdout }}"
+
+

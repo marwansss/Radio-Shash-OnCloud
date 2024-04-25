@@ -1,0 +1,36 @@
+- name: intialize the cluster
+  when: inventory_hostname in groups['master']
+  ansible.builtin.shell:
+    cmd:   
+      kubeadm init --pod-network-cidr=10.244.0.0/16
+
+
+- name: Create .kube dir
+  when: inventory_hostname in groups['master']
+  ansible.builtin.file:
+    path: /home/maro/.kube
+    state: directory
+    mode: '0755'
+    owner: maro
+
+
+- name: allow any user to use kubectl
+  when: inventory_hostname in groups['master']
+  ansible.builtin.copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/maro/.kube/config
+    remote_src: yes
+    owner: maro
+    group: maro
+    mode: '0755'
+
+
+
+
+- name: install flannel
+  when: inventory_hostname in groups['master']
+  become_user: maro
+  #to deploy flannel pod network
+  #command: kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
+  #to deploy wave-net pod network
+  command: kubectl apply -f https://reweave.azurewebsites.net/k8s/v1.29/net.yaml 

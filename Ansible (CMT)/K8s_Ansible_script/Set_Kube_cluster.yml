@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+  pre_tasks:
+  - name: update apt packages
+    ansible.builtin.apt:
+      update_cache: true
+
+- hosts: all
+  become: true
+  roles:
+
+
+    - role: init_node
+
+
+    - role: master
+
+
+    - role: worker
+
+
+
+
+
