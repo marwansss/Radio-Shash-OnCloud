@@ -1,0 +1,7 @@
+version: "3"
+services: 
+  webserver:
+    image: maro4299311/radioshash:2.0
+    container_name: radioshash
+    ports: 
+      - 5000:5000
