@@ -6,7 +6,6 @@ pipeline{
     stage('Fitch last code updates'){
       steps{
         git(url: 'https://github.com/marwansss/Radio-Shash-OnCloud.git', branch: 'test')
-        sh "scp maro@192.168.1.6:/home/maro/Desktop/Radio-Shash-OnCloud/Terraform/model_2 (3).h5 ./App_Sourcecode "
       }
     }
 
@@ -14,7 +13,7 @@ pipeline{
     stage('build Image'){
       steps{
         sh '''
-        cd App_Sourcecode
+        cd App_Sourcecode/
         sudo docker build -t maro4299311/radioshash:${env.BUILD_NUMBER} .
            '''                    
         withCredentials([usernamePassword(credentialsId: 'dockerusername&password', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
