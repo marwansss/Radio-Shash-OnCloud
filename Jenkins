@@ -1,0 +1,34 @@
+pipeline{
+
+  agent any
+
+  stages{
+    stage('Fitch last code updates'){
+      steps{
+        git(url: 'https://github.com/marwansss/Radio-Shash-OnCloud.git', branch: 'test')
+      }
+    }
+
+
+    stage('build Image'){
+      steps{
+        sh "docker build -t radioshash-repo:${env.BUILD_NUMBER} App_Sourcecode/."                    
+        withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                  
+                  sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 324997758306.dkr.ecr.us-east-1.amazonaws.com"
+                  sh "docker tag radioshash-repo:${env.BUILD_NUMBER} 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"
+                  sh "docker push 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"   
+        }
+      }
+    }
+
+    stage('update k8s files'){
+      steps{
+        sh "sed -i 's|image:.*|image: 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}|g\' Kubernetes/deployment.yml"
+      }
+    }
+
+
+
+  }
+}
