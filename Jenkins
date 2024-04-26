@@ -16,6 +16,7 @@ pipeline{
       steps{
         sh "docker build -t radioshash-repo:${env.BUILD_NUMBER} App_Sourcecode/."                    
         withCredentials([string(credentialsId: 'ecr', variable: 'MY_SECRET')]) {   
+                 sh "pip3 install --upgrade awscli"
                  sh "$MY_SECRET"
                  sh "docker tag radioshash-repo:${env.BUILD_NUMBER} public.ecr.aws/k9h2m6v6/radioshash-repo:${env.BUILD_NUMBER}"
                  sh "docker push public.ecr.aws/k9h2m6v6/radioshash-repo:${env.BUILD_NUMBER}" 
