@@ -6,7 +6,7 @@ pipeline{
     stage('Fitch last code updates'){
       steps{
         git(url: 'https://github.com/marwansss/Radio-Shash-OnCloud.git', branch: 'test')
-        aws s3 cp s3://maro-s3/'model_2 (3).h5' App_Sourcecode/
+        sh "aws s3 cp s3://maro-s3/'model_2 (3).h5' App_Sourcecode/"
 
       }
     }
