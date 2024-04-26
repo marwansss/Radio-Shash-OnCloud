@@ -13,12 +13,19 @@ pipeline{
     stage('build Image'){
       steps{
         sh "docker build -t radioshash-repo:${env.BUILD_NUMBER} App_Sourcecode/."                    
-        withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        withCredentials([Secret text(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                   
                   sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 324997758306.dkr.ecr.us-east-1.amazonaws.com"
                   sh "docker tag radioshash-repo:${env.BUILD_NUMBER} 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"
                   sh "docker push 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"   
         }
+        withCredentials([string(credentialsId: 'ecr', variable: 'MY_SECRET')]) {   
+                 sh "$MY_SECRET"
+                 sh "docker tag radioshash-repo:${env.BUILD_NUMBER} 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"
+                 sh "docker push 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}" 
+                    
+                }
+
       }
     }
 
