@@ -16,7 +16,7 @@ pipeline{
         withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                   
                   sh "docker login -u $USERNAME -p $PASSWORD"
-                  sh "docker push maro4299311/radioshash:${env.BUILD_NUMBER}"
+                  //sh "docker push maro4299311/radioshash:${env.BUILD_NUMBER}"
                      
         }
       }
@@ -24,7 +24,7 @@ pipeline{
 
     stage('update k8s files'){
       steps{
-        sh "sed -i \'s|image:.*|image: maro4299311/radioshash:${env.BUILD_NUMBER}|g\' Kubernetes/deployment.yml"
+        sh "sed -i \'s|image:.*|image: maro4299311/radioshash:34|g\' Kubernetes/deployment.yml"
       }
     }
 
