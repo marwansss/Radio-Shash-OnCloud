@@ -1,0 +1,4 @@
+- name: install aws_cli packages
+  ansible.builtin.apt:
+    name: awscli
+    state: present
