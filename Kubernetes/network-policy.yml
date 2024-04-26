@@ -11,10 +11,12 @@ spec:
   - Ingress
   ingress:
   - from:
-  #Use dig +short worker-lb-1565124959.us-east-1.elb.amazonaws.com to resolve lb dns to ip
+  # use dig +short worker-lb-1565124959.us-east-1.elb.amazonaws.com to resolve lb dns to ip 
     - ipBlock:
         cidr: "44.215.190.219/32"  # Assume /32 for individual IP
     - ipBlock:
-        cidr: "54.147.51.238/32"    ports:
+        cidr: "54.147.51.238/32"  # Assume /32 for individual IP
+    ports:
     - protocol: TCP
       port: 5000
+
