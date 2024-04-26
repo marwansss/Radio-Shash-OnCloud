@@ -13,9 +13,9 @@
 
 - name: execute some shell commands
   ansible.builtin.shell:
-    cmd: 
+    cmd: |
       sudo dpkg --configure -a
-      sudo mkdir -p /etc/apt/keyrings
+      sudo mkdir /etc/apt/keyrings
       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
@@ -79,10 +79,10 @@
     - curl
 
 
-#- name: Download the public signing key for the Kubernetes package repositories
- # ansible.builtin.shell:
- #   cmd: |
- #     curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+- name: Download the public signing key for the Kubernetes package repositories
+  ansible.builtin.shell:
+    cmd: |
+      curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 
 
