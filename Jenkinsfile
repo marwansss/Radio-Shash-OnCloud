@@ -22,12 +22,11 @@ pipeline{
       }
     }
 
-//    stage('update k8s files'){
- //     steps{
-  //      cd ../Kubernetes
-   //     sh "sed -i \'s|image:.*|image: maro4299311/radioshash:${env.BUILD_NUMBER}|g\' deployment.yml"
-    //  }
-   // }
+    stage('update k8s files'){
+      steps{
+        sh "sed -i \'s|image:.*|image: maro4299311/radioshash:${env.BUILD_NUMBER}|g\' Kubernetes/deployment.yml"
+      }
+    }
 
 
 
