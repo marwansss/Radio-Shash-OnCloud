@@ -1,0 +1,62 @@
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    
+    
+- name: install packages
+  ansible.builtin.apt:
+    name: "{{item}}"
+    state: present
+  loop:
+    - ca-certificates
+    - curl 
+
+- name: Add some configurations
+  shell: |
+        # Create the /etc/apt/keyrings directory with the right permissions
+        install -m 0755 -d /etc/apt/keyrings
+        
+        # Download Docker's official GPG key
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        
+        # Set permissions for Docker's GPG key
+        chmod a+r /etc/apt/keyrings/docker.asc
+        
+        # Add the Docker repository to APT sources
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        
+
+- name: update apt
+  ansible.builtin.apt:
+    update_cache: yes
+    
+    
+    
+- name: Install Docker and associated packages
+  ansible.builtin.apt:
+    name: "{{item}}"
+    state: present
+  loop:
+    - docker
+    - containerd.io
+    - docker-ce
+    - docker-ce-cli
+    - docker-buildx-plugin
+    - docker-compose-plugin
+    - docker-compose    
+    
+    
+- name: Restart service docker, in all cases
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+    enabled: yes
+    
+    
+    
+- name: Set file permissions
+  ansible.builtin.file:
+    path: /var/run/docker.sock
+    owner: root    # Optional: Change the owner
+    group: docker   # Optional: Change the group
+    mode: '0777'     
