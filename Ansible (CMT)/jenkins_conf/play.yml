@@ -1,5 +1,5 @@
 - name: pretask to update cache
-  hosts: all
+  hosts: localhost
   pre_tasks:
 
     - name:  Update apt cache
@@ -15,6 +15,9 @@
 
 
     - role: docker
+    
+    
+    - role: aws-cli
 
 
 
