@@ -27,7 +27,7 @@
 
 
 
-- name: install flannel
+- name: install pod network solution [flannel/weave]
   when: inventory_hostname in groups['master']
   become_user: ubuntu
   #to deploy flannel pod network
