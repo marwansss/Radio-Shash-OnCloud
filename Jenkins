@@ -17,9 +17,8 @@ pipeline{
         sh "docker build -t radioshash-repo:${env.BUILD_NUMBER} App_Sourcecode/."                    
         withCredentials([string(credentialsId: 'ecr', variable: 'MY_SECRET')]) {   
                  sh "$MY_SECRET"
-                 sh "docker tag radioshash-repo:${env.BUILD_NUMBER} 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}"
-                 sh "docker push 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}" 
-                    
+                 sh "docker tag radioshash-repo:${env.BUILD_NUMBER} public.ecr.aws/k9h2m6v6/radioshash-repo:${env.BUILD_NUMBER}"
+                 sh "docker push public.ecr.aws/k9h2m6v6/radioshash-repo:${env.BUILD_NUMBER}" 
                 }
 
       }
@@ -27,7 +26,7 @@ pipeline{
 
     stage('update k8s files'){
       steps{
-        sh "sed -i 's|image:.*|image: 324997758306.dkr.ecr.us-east-1.amazonaws.com/radioshash-repo:${env.BUILD_NUMBER}|g\' Kubernetes/deployment.yml"
+        sh "sed -i 's|image:.*|image: public.ecr.aws/k9h2m6v6/radioshash-repo:${env.BUILD_NUMBER}|g\' Kubernetes/deployment.yml"
       }
     }
 
