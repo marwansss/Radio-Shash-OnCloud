@@ -37,9 +37,9 @@ pipeline{
       steps{
          withCredentials([file(credentialsId:'k8s', variable:'KUBECONFIG')]){
                 script{
-                    sh "kubectl --kubeconfig=KUBECONFIG apply -f Kubernetes/deployment.yml"
-                    sh "kubectl --kubeconfig=KUBECONFIG apply -f Kubernetes/service.yml"
-                    sh "kubectl --kubeconfig=KUBECONFIG apply -f Kubernetes/network-policy.yml"
+                    sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/deployment.yml"
+                    sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/service.yml"
+                    sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/network-policy.yml"
                 }
          }
       }
