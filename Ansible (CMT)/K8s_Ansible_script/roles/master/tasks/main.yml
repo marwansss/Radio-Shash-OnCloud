@@ -8,20 +8,20 @@
 - name: Create .kube dir
   when: inventory_hostname in groups['master']
   ansible.builtin.file:
-    path: /home/maro/.kube
+    path: /home/ubuntu/.kube
     state: directory
     mode: '0755'
-    owner: maro
+    owner: ubuntu
 
 
 - name: allow any user to use kubectl
   when: inventory_hostname in groups['master']
   ansible.builtin.copy:
     src: /etc/kubernetes/admin.conf
-    dest: /home/maro/.kube/config
+    dest: /home/ubuntu/.kube/config
     remote_src: yes
-    owner: maro
-    group: maro
+    owner: ubuntu
+    group: ubuntu
     mode: '0755'
 
 
@@ -29,7 +29,7 @@
 
 - name: install flannel
   when: inventory_hostname in groups['master']
-  become_user: maro
+  become_user: ubuntu
   #to deploy flannel pod network
   #command: kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.20.2/Documentation/kube-flannel.yml
   #to deploy wave-net pod network
