@@ -24,7 +24,7 @@ pipeline{
 
     stage('update k8s files'){
       steps{
-        sh "sed -i \'s/image*/image: maro4299311/radioshash:${env.BUILD_NUMBER}/\' Kubernetes/deployment.yml"
+        sh "sed -i \"s/image*/image: maro4299311/radioshash:${env.BUILD_NUMBER}/\" Kubernetes/deployment.yml"
       }
     }
 
