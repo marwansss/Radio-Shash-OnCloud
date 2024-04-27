@@ -20,5 +20,8 @@
     - role: aws-cli
 
 
+    - role: kubectl
+
+
 
 
