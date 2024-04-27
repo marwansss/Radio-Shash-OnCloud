@@ -1,54 +1,54 @@
-#Create public TargetGroup
-resource "aws_lb_target_group" "proxy-tg" {
-  name     = "proxy-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
-  load_balancing_algorithm_type = "round_robin"
-  target_type = "instance"
-  health_check {
-    path                = "/"
-    port                = 80
-    protocol            = "HTTP"
-    timeout             = 5
-    interval            = 30
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-  } 
+# #Create public TargetGroup
+# resource "aws_lb_target_group" "proxy-tg" {
+#   name     = "proxy-tg"
+#   port     = 80
+#   protocol = "HTTP"
+#   vpc_id   = var.vpc_id
+#   load_balancing_algorithm_type = "round_robin"
+#   target_type = "instance"
+#   health_check {
+#     path                = "/"
+#     port                = 80
+#     protocol            = "HTTP"
+#     timeout             = 5
+#     interval            = 30
+#     healthy_threshold   = 2
+#     unhealthy_threshold = 2
+#   } 
 
-}
+# }
 
-#attaching ec2 to proxy-tg target group
-resource "aws_lb_target_group_attachment" "proxy_attach" {
-  count = length(var.proxy-server-id)
-  target_group_arn = aws_lb_target_group.proxy-tg.arn
-  target_id        = var.proxy-server-id[count.index]
-  port             = 80
-}
+# #attaching ec2 to proxy-tg target group
+# resource "aws_lb_target_group_attachment" "proxy_attach" {
+#   count = length(var.proxy-server-id)
+#   target_group_arn = aws_lb_target_group.proxy-tg.arn
+#   target_id        = var.proxy-server-id[count.index]
+#   port             = 80
+# }
 
 
 
-#Create public Load-Balancer
-resource "aws_lb" "proxy-lb" {
-  name               = "proxy-lb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb-sg.id]
-  #specify your subnets to attach them to load-balancer
-  subnets            =  var.proxy-lb-subnets
-}
+# #Create public Load-Balancer
+# resource "aws_lb" "proxy-lb" {
+#   name               = "proxy-lb"
+#   internal           = false
+#   load_balancer_type = "application"
+#   security_groups    = [aws_security_group.lb-sg.id]
+#   #specify your subnets to attach them to load-balancer
+#   subnets            =  var.proxy-lb-subnets
+# }
 
-#Add LB listener
-resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.proxy-lb.arn
-  port              = "80"
-  protocol          = "HTTP"
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.proxy-tg.arn
-  }
+# #Add LB listener
+# resource "aws_lb_listener" "http" {
+#   load_balancer_arn = aws_lb.proxy-lb.arn
+#   port              = "80"
+#   protocol          = "HTTP"
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.proxy-tg.arn
+#   }
   
-}
+# }
 
 
 #SecurityGroups & Policies for public and private Load-Balancer
@@ -125,7 +125,7 @@ resource "aws_lb_target_group_attachment" "k8s_worker_attach" {
 #Create private Load-Balancer
 resource "aws_lb" "worker-lb" {
   name               = "worker-lb"
-  internal           = true
+  internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb-sg.id]
   #specify your subnets to attach them to load-balancer

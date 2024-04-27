@@ -22,9 +22,9 @@ variable "SSH" {
   default = "22"
 }
 
-variable "proxy-server-id" {
-  type = list
-}
+# variable "proxy-server-id" {
+#   type = list
+# }
 
 variable "k8s-workers-id" {
   type = list

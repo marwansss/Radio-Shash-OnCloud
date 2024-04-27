@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "S3logs_storage" {
 }
 
 #push the AI model to the s3 to be retrieve when building docker image
-resource "aws_s3_bucket_object" "example" {
+resource "aws_s3_object" "Store_AI_Model" {
   key                    = "model_2 (3).h5"
   bucket                 = aws_s3_bucket.S3logs_storage.id
   source                 = "model_2 (3).h5"

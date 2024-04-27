@@ -1,12 +1,16 @@
 #Creating Amazon container registry
-resource "aws_ecr_repository" "radioshash-repo" {
-  name                 = "radioshash-repo"
-  image_tag_mutability = "MUTABLE"
+resource "aws_ecrpublic_repository" "radioshash-repo" {
+  repository_name = "radioshash-repo"
 
-  image_scanning_configuration {
-    scan_on_push = true
+  catalog_data {
+    about_text        = "About Text"
+    architectures     = ["ARM"]
+    description       = "Description"
+    operating_systems = ["Linux"]
+    usage_text        = "Usage Text"
   }
-   tags = {
+
+  tags = {
     Name = "radioshash-repo"
   }
 }
