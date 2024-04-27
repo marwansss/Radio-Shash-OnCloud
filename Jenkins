@@ -40,6 +40,7 @@ pipeline{
                     //sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/deployment.yml"
                     //sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/service.yml"
                     //sh "kubectl --kubeconfig=$KUBECONFIG apply -f Kubernetes/network-policy.yml"
+                    // i have copied .kube file to jenkins home directory so i do not neet --kubeconfig option
                     sh "kubectl apply -f Kubernetes/deployment.yml"
                     sh "kubectl apply -f Kubernetes/service.yml"
                     sh "kubectl apply -f Kubernetes/network-policy.yml"
