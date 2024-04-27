@@ -188,7 +188,7 @@ resource "aws_instance" "K8s_master" {
 
 # Creating proxy-servers
 #proxy servers will act as ansible and Jenkins masters
-resource "aws_instance" "proxy-servers" {
+resource "aws_instance" "jenkins-servers" {
   # count = length(var.public_subnets_ids)
   ami           = data.aws_ami.ubuntu.id
   associate_public_ip_address = true
@@ -206,6 +206,6 @@ resource "aws_instance" "proxy-servers" {
 }
 
  resource "local_file" "jenkins_ip" {
-    content = aws_instance.proxy-servers.public_ip
+    content = aws_instance.jenkins-servers.public_ip
     filename = "/home/maro/Desktop/Radio-Shash-OnCloud/Ansible/jenkins_conf/inventory"
  }

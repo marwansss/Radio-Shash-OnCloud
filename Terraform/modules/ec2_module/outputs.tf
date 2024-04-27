@@ -1,5 +1,5 @@
 output "proxy-id" {
-  value = aws_instance.proxy-servers.id
+  value = aws_instance.jenkins-servers.id
 }
 
 output "k8s-worker-id" {
@@ -21,10 +21,10 @@ output "k8s-master-id" {
 
 
 output "jenkins_ip" {
-  value = aws_instance.proxy-servers.public_ip
+  value = aws_instance.jenkins-servers.public_ip
 }
 
 
 output "jenkins_arn" {
-   value = aws_instance.proxy-servers.arn
+   value = aws_instance.jenkins-servers.arn
 }

@@ -28,6 +28,12 @@ module "rds_module" {
   source = "./modules/rds_module"
 }
 
+module "cloudwatch_module" {
+  source = "./modules/cloudwatch_module"
+  master_id = module.ec2_module.k8s-master-id
+  workers_id = module.ec2_module.k8s-worker-id
+}
+
 module "backup_module" {
   source = "./modules/backup_module"
   jenkins_arn = module.ec2_module.jenkins_arn
@@ -35,20 +41,20 @@ module "backup_module" {
 
 module "elb_module" {
   source = "./modules/elb_module"
-  proxy-server-id = module.ec2_module.proxy-id
+  # proxy-server-id = module.ec2_module.proxy-id
   k8s-workers-id =  module.ec2_module.k8s-worker-id
   proxy-lb-subnets = module.infrastructure_module.public-subnets-id
   vpc_id = module.infrastructure_module.vpc_id
-  k8s-worker-lb-subnets =  module.infrastructure_module.private-subnets-id
+  k8s-worker-lb-subnets =  module.infrastructure_module.public-subnets-id
   s3-name_bucket = module.s3_module.s3_storage
 }
 module "ecr_module" {
   source = "./modules/ecr_module"
 }
 
-output "internet-loadbalancer" {
-  value = module.elb_module.internet-lb
-}
+# output "internet-loadbalancer" {
+#   value = module.elb_module.internet-lb
+# }
 
 output "internal-loadbalancer" {
   value = module.elb_module.internal-lb
