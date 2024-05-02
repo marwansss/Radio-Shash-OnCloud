@@ -41,6 +41,8 @@ terraform init # Initialize Terraform, install providers
 terraform plan # Review the infrastructure plan
 terraform apply # Apply the configuration to create the infrastructure
 
+![Example GIF](/assets/Project.gif)
+
 
 
 #### Configure Jenkins EC2 Instance
