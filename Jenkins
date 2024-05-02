@@ -1,3 +1,4 @@
+#Jenkins file for pushing docker image to ECR (Elastic Container Registery) in aws
 pipeline{
 
   agent any
