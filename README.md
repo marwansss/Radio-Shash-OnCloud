@@ -22,13 +22,13 @@ These instructions will help you set up the project's infrastructure and get the
 
 #### Prerequisites
 
- **Terraform**: Install terraform in your localhost to apply terraform code.
+- **Terraform**: Install Terraform on your local machine to apply the Terraform code.
 
 #### Terraform Setup
 
 Terraform is used to automatically provision and manage the cloud infrastructure required for the Radioshash project on AWS. Below are the specific responsibilities handled by Terraform in this project:
 
-1. **AWS RDS Instance**: Provisions an Amazon RDS instance.
+1. **AWS RDS Instance**: Provisions an Amazon RDS instance that hosts the application database.
 2. **EC2 Instance for Jenkins**: Sets up an Amazon EC2 instance to serve as the Jenkins server.
 3. **AWS Backup Service**: Configures AWS Backup to take daily snapshots of the Jenkins EC2 instance.
 4. **ELB Access Log Storage**: Saves access logs from the Elastic Load Balancer to an AWS S3 bucket.
@@ -36,27 +36,34 @@ Terraform is used to automatically provision and manage the cloud infrastructure
 6. **AWS CloudWatch Dashboard for Kubernetes Cluster**: Automates the creation of a CloudWatch dashboard to monitor the Kubernetes cluster.
 
 To apply the Terraform configurations:
-```bash
-terraform init   # Initialize Terraform, install providers
-terraform plan   # Review the infrastructure plan
-terraform apply  # Apply the configuration to create the infrastructure
+
+terraform init # Initialize Terraform, install providers
+terraform plan # Review the infrastructure plan
+terraform apply # Apply the configuration to create the infrastructure
 
 
-  **Configure Jenkins EC2 Instance**
-   - Once the infrastructure is set up, SSH into your Jenkins EC2 instance. This instance acts as a bastion host as well as the Jenkins server.
-   - Run the following script to install Ansible on the Jenkins EC2:
 
-     ./Install_Ansible.sh
-     
-   - Execute Ansible playbooks to configure the Kubernetes cluster, cloud agents on all EC2 instances, and the Jenkins EC2 itself with the necessary packages and configurations:
+#### Configure Jenkins EC2 Instance
 
-     cd Ansible (CMT)
-     Run all playbooks inside this Directory
+- Once the infrastructure is set up, SSH into your Jenkins EC2 instance. This instance acts as a bastion host as well as the Jenkins server.
+- Run the following script to install Ansible on the Jenkins EC2:
 
-3. **Deploy Using Jenkins**
-   - Access your Jenkins dashboard to run the pipeline (File: Jenkins) which will:
-     - Build and push Docker images to AWS ECR.
-     - Deploy the application to Kubernetes.
+./Install_Ansible.sh
+
+
+
+- Execute Ansible playbooks to configure the Kubernetes cluster using kube-adm tool, cloud agents on all EC2 instances, and the Jenkins EC2 itself with the necessary packages and configurations:
+
+cd Ansible
+Run all playbooks inside this Directory
+
+
+
+#### Deploy Using Jenkins
+
+- Access your Jenkins dashboard to run the pipeline (File: Jenkins) which will:
+- Build and push Docker images to AWS ECR.
+- Deploy the application to Kubernetes.
 
 #### Usage
 
@@ -66,8 +73,7 @@ terraform apply  # Apply the configuration to create the infrastructure
 ### Monitoring and Maintenance
 
 - **AWS CloudWatch**: Monitor the Kubernetes cluster and EC2 instances.
-- **S3 Buckets**: Store ELB access logs and the deep learning model file.
+- **S3 Buckets**: Store ELB access logs and the deep learning model file used in building docker image.
 - **AWS Backup**: Automate snapshot creation for Jenkins EC2 machine.
-
 
 Enjoy using Radioshash for detecting and understanding brain tumors through cutting-edge technology and cloud infrastructure!
