@@ -1,3 +1,4 @@
+#This pipeline for pushing docker image to dockerhub
 pipeline{
 
   agent any
